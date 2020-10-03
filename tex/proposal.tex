@@ -1,14 +1,43 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 
-\title{test}
-\author{jabarih }
-\date{October 2020}
+\title{CS 229 Project Proposal: \\Face Mask Detection with Artificial Intelligence}
+\author{
+Jabari Hastings, Muhammad Chaudhry, Shelly Deng \\
+\{jabarih, mahmedch, jsdeng\}@stanford.edu
+}
+\date{\today}
 
 \begin{document}
 
 \maketitle
+\noindent \textbf{Category:} Computer Vision
 
-\section{Introduction}
+\section*{Motivation}
+
+Due to the nature of the ongoing COVID-19 pandemic, the wearing of masks in public spaces has become a necessary part of our daily lives. Unfortunately, we do not live in an ideal world where people always wear masks in public spaces. Sometimes this is unintentional; people might forget. In other cases, there is an outright refusal to wear a mask. Regardless of the circumstance, there is clearly a need for a system that enforces the wearing of masks.
+
+Thus far, the enforcement of mask wearing has been managed by personnel on the ground. For instance, the police might patrol public spaces and encourage people who have failed to wear a mask. However, such an approach might be ineffective because of the limitation of human vision. An ideal solution would be to leverage a network of cameras to identify whether someone is wearing a mask. Such a system would leave the difficult task of identifying whether someone is failing to wear a mask to a computer and allow the enforcers to handle the intervention. 
+
+Our project seeks to tackle the first phase of this system. 
+We intend to build a model that will allow us to classify images based on whether they are 1) wearing masks, 2) wearing masks incorrectly, or 3) not wearing masks. We will use the dataset\footnote{https://www.kaggle.com/andrewmvd/face-mask-detection} on Kaggle, which consists of 853 images total belonging to the three aforementioned classes. 
+
+\section*{Methods}
+
+For this project, we will first likely perform a processing step to crop images with multiple faces in order to produce images with a single face. This can be done manually or with an existing facial recognition system. To classify images into the three buckets (no mask, wearing mask correctly, and wearing mask incorrectly), we will compare different machine learning approaches. For the baseline, we will use a simple supervised multinomial logistic regression model. We also plan to use a support vector machine and supply it with either a polynomial or gaussian kernel. Finally, we can use a (convolutional) neural network, where earlier layers extract low-level features to be supplied to later layers to build higher-level features from the image. While multinomial logistic regression and SVM are more difficult since they require us to handcraft a selection of features from the images, we are still interested in their potential. If our handcrafted features give promising results, we can potentially add that to the neural network that we plan on building. 
+
+Since our work is closely related to the topic of facial recognition, we believe that the existing resources in this area (e.g. included in the references) will help to inform our approach.
+
+\section*{Intended Experiments/Evaluation}
+Since the main goal for the project is to determine whether someone was wearing a mask in the image, the intended experiment would just be to run our model on a dataset of pictures of individuals wearing a mask or not wearing a mask. On a simplistic level, the evaluation would be prediction accuracy (whether or not the model accurately predicts whether the face has a mask on or not, so generating a confusion matrix). On a more sophisticated level, our evaluation could potentially involve data on the pixel level or some other numeric measure of image details (the part of the image covered by the mask would tend to have a lighter color than the surrounding facial features.  
+
+\section*{Reference}
+\begin{itemize}
+    \item Introna, L and Nissenbaum, H (2010) \textit{Facial Recognition Technology A Survey of Policy and Implementation Issues}. Working Paper. The Department of Organisation, Work and Technology, Lancaster University.
+    \item Bah, S. and Ming, F., 2020. An Improved Face Recognition Algorithm And Its Application In Attendance Management System. [online] ScienceDirect. Available at: https://www.sciencedirect.com/science/article\\
+    /pii/S2590005619300141 [Accessed 2 October 2020].
+
+\end{itemize}
 
 \end{document}
+
