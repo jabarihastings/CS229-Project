@@ -8,5 +8,5 @@ classes, as well as their bounding boxes in the PASCAL VOC format.The classes ar
 The images (with multiple people and thus multiple lables) are cropped and placed into the respective folders using an
 adoption of "pascalvoc-to-image" (https://gitlab.com/straighter/pascalvoc-to-image). There exists some differences in
 the XML formatting of the PASCAL VOC annotations, and thus changes were needed to be made in order to make the
-pascalvoc-to-image script work. This resulted in 3232 images of "With mask", 123 images of "mask worn incorrectly", and
+pascalvoc-to-image script work. This resulted in 3232 images of "With mask", 124 images of "mask worn incorrectly", and
 717 images of "without mask".
