@@ -36,7 +36,7 @@ def main():
 
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=0)
     clf = LogisticRegression(random_state=0, max_iter=1000).fit(X_train, Y_train)
-    clf = SGDClassifier(loss='log', max_iter=10000).fit(X_train, Y_train)
+    # clf = SGDClassifier(loss='log', max_iter=10000).fit(X_train, Y_train)
 
     predictedTrain = clf.predict(X_train)
     findF1Score(predictedTrain, Y_train, "On Train Set")
@@ -47,6 +47,8 @@ def main():
     findF1Score(predictedTest, Y_test, "On Test Set")
     accOnTest = clf.score(X_test, Y_test)
     print("Acc on test: ", accOnTest)
+
+    util.visualize(X_train, Y_train)
 
 
 
