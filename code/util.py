@@ -4,6 +4,7 @@ from os import listdir
 from sklearn.decomposition import PCA
 from skimage.transform import resize
 from matplotlib import pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 
 def load_dataset(train_path, add_intercept=False, verbose=True):
