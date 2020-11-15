@@ -1,0 +1,130 @@
+2020-11-15 14:18:08,045:INFO: Loading the datasets...
+2020-11-15 14:18:27,593:INFO: Loading the datasets...
+2020-11-15 14:18:27,607:INFO: - done.
+2020-11-15 14:18:27,608:INFO: Starting training for 30 epoch(s)
+2020-11-15 14:18:27,608:INFO: Epoch 1/30
+2020-11-15 14:19:00,272:INFO: Loading the datasets...
+2020-11-15 14:19:00,289:INFO: - done.
+2020-11-15 14:19:00,289:INFO: Starting training for 30 epoch(s)
+2020-11-15 14:19:00,290:INFO: Epoch 1/30
+2020-11-15 14:20:25,991:INFO: Loading the datasets...
+2020-11-15 14:20:26,005:INFO: - done.
+2020-11-15 14:20:26,006:INFO: Starting training for 30 epoch(s)
+2020-11-15 14:20:26,006:INFO: Epoch 1/30
+2020-11-15 14:21:43,772:INFO: Loading the datasets...
+2020-11-15 14:21:43,786:INFO: - done.
+2020-11-15 14:21:43,787:INFO: Starting training for 30 epoch(s)
+2020-11-15 14:21:43,787:INFO: Epoch 1/30
+2020-11-15 14:25:09,232:INFO: Loading the datasets...
+2020-11-15 14:25:09,248:INFO: - done.
+2020-11-15 14:25:09,249:INFO: Starting training for 30 epoch(s)
+2020-11-15 14:25:09,249:INFO: Epoch 1/30
+2020-11-15 14:25:27,631:INFO: Loading the datasets...
+2020-11-15 14:25:27,647:INFO: - done.
+2020-11-15 14:25:27,647:INFO: Starting training for 30 epoch(s)
+2020-11-15 14:25:27,647:INFO: Epoch 1/30
+2020-11-15 14:26:18,731:INFO: Loading the datasets...
+2020-11-15 14:26:18,746:INFO: - done.
+2020-11-15 14:26:18,746:INFO: Starting training for 30 epoch(s)
+2020-11-15 14:26:18,747:INFO: Epoch 1/30
+2020-11-15 14:27:09,277:INFO: Loading the datasets...
+2020-11-15 14:27:09,291:INFO: - done.
+2020-11-15 14:27:09,292:INFO: Starting training for 30 epoch(s)
+2020-11-15 14:27:09,292:INFO: Epoch 1/30
+2020-11-15 14:27:34,439:INFO: Loading the datasets...
+2020-11-15 14:27:34,454:INFO: - done.
+2020-11-15 14:27:34,455:INFO: Starting training for 30 epoch(s)
+2020-11-15 14:27:34,455:INFO: Epoch 1/30
+2020-11-15 14:28:58,920:INFO: Loading the datasets...
+2020-11-15 14:28:58,934:INFO: - done.
+2020-11-15 14:28:58,935:INFO: Starting training for 30 epoch(s)
+2020-11-15 14:28:58,935:INFO: Epoch 1/30
+2020-11-15 14:29:17,099:INFO: Loading the datasets...
+2020-11-15 14:29:17,113:INFO: - done.
+2020-11-15 14:29:17,114:INFO: Starting training for 30 epoch(s)
+2020-11-15 14:29:17,114:INFO: Epoch 1/30
+2020-11-15 14:40:25,026:INFO: Loading the datasets...
+2020-11-15 14:40:25,040:INFO: - done.
+2020-11-15 14:40:25,042:INFO: Starting training for 30 epoch(s)
+2020-11-15 14:40:25,042:INFO: Epoch 1/30
+2020-11-15 14:40:51,582:INFO: Loading the datasets...
+2020-11-15 14:40:51,597:INFO: - done.
+2020-11-15 14:40:51,598:INFO: Starting training for 30 epoch(s)
+2020-11-15 14:40:51,598:INFO: Epoch 1/30
+2020-11-15 14:41:03,303:INFO: Loading the datasets...
+2020-11-15 14:41:03,318:INFO: - done.
+2020-11-15 14:41:03,325:INFO: Starting training for 30 epoch(s)
+2020-11-15 14:41:03,325:INFO: Epoch 1/30
+2020-11-15 14:41:13,413:INFO: Loading the datasets...
+2020-11-15 14:41:13,428:INFO: - done.
+2020-11-15 14:41:13,432:INFO: Starting training for 30 epoch(s)
+2020-11-15 14:41:13,432:INFO: Epoch 1/30
+2020-11-15 14:41:43,412:INFO: Loading the datasets...
+2020-11-15 14:41:43,427:INFO: - done.
+2020-11-15 14:41:43,431:INFO: Starting training for 30 epoch(s)
+2020-11-15 14:41:43,431:INFO: Epoch 1/30
+2020-11-15 14:57:34,201:INFO: Loading the datasets...
+2020-11-15 14:57:34,216:INFO: - done.
+2020-11-15 14:58:26,098:INFO: Loading the datasets...
+2020-11-15 14:58:26,112:INFO: - done.
+2020-11-15 14:58:37,534:INFO: Loading the datasets...
+2020-11-15 14:58:37,549:INFO: - done.
+2020-11-15 14:59:04,907:INFO: Loading the datasets...
+2020-11-15 14:59:04,922:INFO: - done.
+2020-11-15 14:59:04,928:INFO: Starting training for 30 epoch(s)
+2020-11-15 14:59:04,928:INFO: Epoch 1/30
+2020-11-15 14:59:39,351:INFO: Loading the datasets...
+2020-11-15 14:59:39,366:INFO: - done.
+2020-11-15 14:59:39,372:INFO: Starting training for 30 epoch(s)
+2020-11-15 14:59:39,372:INFO: Epoch 1/30
+2020-11-15 15:00:15,680:INFO: Loading the datasets...
+2020-11-15 15:00:15,695:INFO: - done.
+2020-11-15 15:00:15,700:INFO: Starting training for 30 epoch(s)
+2020-11-15 15:00:15,700:INFO: Epoch 1/30
+2020-11-15 15:00:33,971:INFO: Loading the datasets...
+2020-11-15 15:00:33,986:INFO: - done.
+2020-11-15 15:00:33,989:INFO: Starting training for 30 epoch(s)
+2020-11-15 15:00:33,989:INFO: Epoch 1/30
+2020-11-15 15:00:47,806:INFO: Loading the datasets...
+2020-11-15 15:00:47,820:INFO: - done.
+2020-11-15 15:00:59,623:INFO: Loading the datasets...
+2020-11-15 15:00:59,638:INFO: - done.
+2020-11-15 15:00:59,647:INFO: Starting training for 30 epoch(s)
+2020-11-15 15:00:59,647:INFO: Epoch 1/30
+2020-11-15 15:01:08,697:INFO: Loading the datasets...
+2020-11-15 15:01:08,712:INFO: - done.
+2020-11-15 15:01:19,239:INFO: Loading the datasets...
+2020-11-15 15:01:19,253:INFO: - done.
+2020-11-15 15:01:19,259:INFO: Starting training for 30 epoch(s)
+2020-11-15 15:01:19,259:INFO: Epoch 1/30
+2020-11-15 15:02:21,660:INFO: Loading the datasets...
+2020-11-15 15:02:21,675:INFO: - done.
+2020-11-15 15:02:57,671:INFO: Loading the datasets...
+2020-11-15 15:02:57,686:INFO: - done.
+2020-11-15 15:02:57,688:INFO: Starting training for 30 epoch(s)
+2020-11-15 15:02:57,688:INFO: Epoch 1/30
+2020-11-15 15:03:18,395:INFO: Loading the datasets...
+2020-11-15 15:03:18,410:INFO: - done.
+2020-11-15 15:03:18,422:INFO: Starting training for 30 epoch(s)
+2020-11-15 15:03:18,422:INFO: Epoch 1/30
+2020-11-15 15:05:31,429:INFO: Loading the datasets...
+2020-11-15 15:05:31,443:INFO: - done.
+2020-11-15 15:05:31,445:INFO: Starting training for 30 epoch(s)
+2020-11-15 15:05:31,445:INFO: Epoch 1/30
+2020-11-15 15:08:13,475:INFO: - Train metrics: accuracy: 0.887 ; macro f1: 0.850 ; loss: 0.326
+2020-11-15 15:08:25,593:INFO: - Eval metrics : accuracy: 0.989 ; macro f1: 0.988 ; loss: 0.028
+2020-11-15 15:08:27,053:INFO: - Found new best accuracy
+2020-11-15 15:08:27,053:INFO: Epoch 2/30
+2020-11-15 15:11:08,214:INFO: - Train metrics: accuracy: 1.000 ; macro f1: 1.000 ; loss: 0.010
+2020-11-15 15:11:20,644:INFO: - Eval metrics : accuracy: 0.996 ; macro f1: 0.996 ; loss: 0.012
+2020-11-15 15:11:21,939:INFO: - Found new best accuracy
+2020-11-15 15:11:21,940:INFO: Epoch 3/30
+2020-11-15 15:14:02,396:INFO: - Train metrics: accuracy: 0.994 ; macro f1: 0.994 ; loss: 0.023
+2020-11-15 15:14:14,140:INFO: - Eval metrics : accuracy: 0.996 ; macro f1: 0.996 ; loss: 0.008
+2020-11-15 15:14:15,390:INFO: - Found new best accuracy
+2020-11-15 15:14:15,391:INFO: Epoch 4/30
+2020-11-15 15:16:54,181:INFO: - Train metrics: accuracy: 0.994 ; macro f1: 0.993 ; loss: 0.013
+2020-11-15 15:17:45,852:INFO: Loading the datasets...
+2020-11-15 15:17:45,867:INFO: - done.
+2020-11-15 15:20:43,441:INFO: Loading the datasets...
+2020-11-15 15:20:43,455:INFO: - done.
