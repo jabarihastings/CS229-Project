@@ -4,9 +4,10 @@ from os import listdir
 from sklearn.decomposition import PCA
 from skimage.transform import resize
 from matplotlib import pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 
-def load_dataset(train_path, add_intercept=False, verbose=True):
+def load_dataset(train_path, classes, img_dimensions, add_intercept=False, verbose=True):
     """
     Args:
         train_path: The folder containing the images
@@ -22,17 +23,18 @@ def load_dataset(train_path, add_intercept=False, verbose=True):
     if verbose:
         print("Loading data from path: {} ".format(train_path))
 
-    for i, sfold in enumerate(['incorrect', 'correct']):
+    for i, sfold in enumerate(classes):
         if verbose:
             print("Loading {} examples...".format(sfold))
 
         path = train_path + "/" + sfold + "/"
         for n, f in enumerate(listdir(path), start=1):
+            if "png" not in f and "jpg" not in f: continue
             img = plt.imread(path + f)[:, :, 0] # Just one dimension
-            img = resize(img, (96, 96), anti_aliasing=True)
+            img = resize(img, (img_dimensions, img_dimensions), anti_aliasing=True)
             x.append(img.flatten())
             y.append(i)
-        
+
         if verbose:
             print("Loaded {} files.".format(n))
 
@@ -62,3 +64,27 @@ def visualize(x, y):
     ax.set_title('PCA of Data Set')
     plt.show()
 
+def decisionMatrix(predicted, actual, verbose = None):
+    isEqual = np.where(predicted != actual, 0, 1)
+    tp = predicted.T.dot(isEqual)
+    fp = (1-isEqual).T.dot(predicted)
+    fn = (1-predicted).T.dot(1-isEqual)
+    tn = (1-predicted).T.dot(isEqual)
+    if (verbose):
+        print(verbose)
+        print("FP: %d" % fp)
+        print("TP: %d" % tp)
+        print("TN: %d" % tn)
+        print("FN: %d" % fn)
+    return (tp, fp, fn, tn)
+
+def findF1Score(predicted, actual, verbose = None):
+    (tp, fp, fn, tn) = decisionMatrix(predicted, actual, verbose)
+    precision = tp / (tp + fp)
+    recall = tp / (tp + fn)
+    f1 = 2 * precision * recall / (precision + recall)
+    if verbose:
+        print("Precision: ", precision)
+        print("Recall: ", recall)
+        print("F1: ", f1)
+    return f1
