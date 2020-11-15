@@ -10,3 +10,9 @@ adoption of "pascalvoc-to-image" (https://gitlab.com/straighter/pascalvoc-to-ima
 the XML formatting of the PASCAL VOC annotations, and thus changes were needed to be made in order to make the
 pascalvoc-to-image script work. This resulted in 3232 images of "With mask", 124 images of "mask worn incorrectly", and
 717 images of "without mask".
+
+Requirements:
+We recommend using python3 and a virtual env. Run the follow commands:
+    virtualenv -p python3 .env
+    source .env/bin/activate
+    pip install -r code/requirements.txt
