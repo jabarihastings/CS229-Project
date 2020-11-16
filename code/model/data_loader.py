@@ -1,3 +1,9 @@
+"""Data Loader for Neural Network
+
+Adapted from CS230 code examples for computer vision.
+Source: https://github.com/cs230-stanford/cs230-code-examples/tree/master/pytorch
+"""
+
 import os
 
 from PIL import Image
@@ -8,7 +14,7 @@ import torchvision.transforms as transforms
 # borrowed from http://pytorch.org/tutorials/advanced/neural_style_tutorial.html
 # and http://pytorch.org/tutorials/beginner/data_loading_tutorial.html
 
-class LeafDataset(Dataset):
+class FaceMaskDataset(Dataset):
     """
     A standard PyTorch definition of Dataset which defines the functions __len__ and __getitem__.
     """
@@ -29,9 +35,6 @@ class LeafDataset(Dataset):
     def __len__(self):
         # return size of dataset
         return len(self.filenames)
-
-    def get_classes_counts(self):
-        return dict(Counter(self.labels))
 
     def __getitem__(self, idx):
         """
@@ -91,14 +94,14 @@ def fetch_dataloader(types, data_dir, params):
     for split in ['train', 'val', 'test']:
         if split in types:
             path = os.path.join(data_dir, split)
+            
             # use the train_transformer if training data, else use eval_transformer without random flip
             if split == 'train':
-                train_dataset = LeafDataset(path, train_transformer)
-                dl = DataLoader(train_dataset,
+                dl = DataLoader(FaceMaskDataset(path, train_transformer),
                                         num_workers=params.num_workers, batch_size=params.batch_size, shuffle=True,
                                         pin_memory=params.cuda)
             else:
-                dl = DataLoader(LeafDataset(path, eval_transformer), batch_size=params.batch_size, shuffle=False,
+                dl = DataLoader(FaceMaskDataset(path, eval_transformer), batch_size=params.batch_size, shuffle=False,
                                 num_workers=params.num_workers,
                                 pin_memory=params.cuda)
 
