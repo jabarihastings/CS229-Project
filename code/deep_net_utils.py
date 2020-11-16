@@ -1,3 +1,10 @@
+"""Utility class
+
+Adapted from CS230 code examples for computer vision.
+Source: https://github.com/cs230-stanford/cs230-code-examples/tree/master/pytorch
+""" 
+
+
 import json
 import logging
 import os

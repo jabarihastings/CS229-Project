@@ -1,8 +1,13 @@
-"""Train the model"""
+"""Train Neural Network
+
+Adapted from CS230 code examples for computer vision.
+Source: https://github.com/cs230-stanford/cs230-code-examples/tree/master/pytorch
+"""
 
 import argparse
 import logging
 import os
+
 import numpy as np
 import torch
 import torch.optim as optim
