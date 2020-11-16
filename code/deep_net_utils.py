@@ -10,30 +10,8 @@ import logging
 import os
 import shutil
 import torch
-import torchvision.models as models
+
 from sklearn import metrics as sklearn_metrics
-
-model_mapping = {
-    'alexnet': models.alexnet(pretrained=True), # fast, used for debugging
-    'resnet': models.resnet18(pretrained=True),
-    'vgg16': models.vgg16(pretrained=True),
-    # 'inception': models.inception_v3(pretrained=True),  # Buggy inception
-    'mobilenet': models.mobilenet_v2(pretrained=True),
-    'googlenet': models.googlenet(pretrained=True),
-}
-
-def get_num_outputs(args):
-        if args.net == "mobile" or args.net == 'vgg16' or args.net == 'alexnet':
-            return model_mapping[args.net].classifier[6].out_features
-        else:
-            return model_mapping[args.net].fc.out_features
-
-def get_model(args):
-    if args.net in model_mapping:
-        return model_mapping[args.net]
-        return m
-    return None
-
 
 def f1_metrics(outputs, labels):
     confusion_matrix = sklearn_metrics.confusion_matrix(labels, outputs)
