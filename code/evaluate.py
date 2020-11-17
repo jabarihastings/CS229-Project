@@ -12,9 +12,9 @@ import model.cnnv2 as cnnv2
 import model.data_loader as data_loader
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--data_dir', default='data/ffhq-maskednet',
+parser.add_argument('--data_dir', default='data/example',
                     help="Directory containing the dataset")
-parser.add_argument('--model_dir', default='code/experiments/example_trans_learning',
+parser.add_argument('--model_dir', default='experiments/example_trans_learning',
                     help="Directory containing params.json")
 parser.add_argument('--net', default='resnet',
                     help="The name of the neural network")
