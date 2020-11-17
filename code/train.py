@@ -21,13 +21,15 @@ import loss_and_metrics
 import model.cnn as cnn
 import model.regular_neural_net as nn
 
+import model.cnnv2 as cnnv2
+
 parser = argparse.ArgumentParser()
-parser.add_argument('--data_dir', default='data/large/three_classes/multiclass',
+parser.add_argument('--data_dir', default='data/ffhq-maskednet',
                     help="Directory containing the dataset")
 parser.add_argument('--model_dir', default='code/experiments/example_trans_learning',
                     help="Directory containing params.json")
 parser.add_argument('--net',
-                    help="Directory containing params.json")
+                    help="The name of the neural network")
 parser.add_argument('--restore_file', default=None,
                     help="Optional, name of the file in --model_dir containing weights to reload before \
                     training")  # 'best' or 'train'
@@ -196,14 +198,20 @@ if __name__ == '__main__':
     logging.info("- done.")
 
     # model selected is based on args.net
-    model = get_desired_model(args, params)
+    #model = get_desired_model(args, params)
+    #print(model)
+
+    model = cnnv2.initialize_model(model_name=args.net, num_classes=3, feature_extract=False, use_pretrained=True)
+    if params.cuda : model = model.cuda()
     print(model)
 
     optimizer = optim.Adam(model.parameters(), lr=params.learning_rate)
 
     # fetch loss function and metrics
-    loss_fn = loss_and_metrics.loss_fn
-    metrics = loss_and_metrics.metrics
+    #loss_fn = loss_and_metrics.loss_fn
+    #metrics = loss_and_metrics.metrics
+    loss_fn = torch.nn.CrossEntropyLoss()
+    metrics = cnnv2.metrics
 
     # Train the model
     logging.info("Starting training for {} epoch(s)".format(params.num_epochs))
