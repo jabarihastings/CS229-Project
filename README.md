@@ -45,6 +45,11 @@ $ source .env/bin/activate
 $ pip install -r code/requirements.txt
 ```
 
+All experiments should be run in the code folder. Here's how we ran a CNN on the Kaggle dataset:
+```sh
+$ python3 train.py --data_dir data/kaggle --model_dir experiments/mobilenet_kaggle --net mobilenet   
+```
+
 ### Todos
  - Add instructions for how to run code
  - Add Night Mode
