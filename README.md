@@ -32,7 +32,7 @@ i. give appropriate credit by citing our papers:
 ii. indicate any changes that you've made,
 iii. and distribute any derivative works under the same license. https://creativecommons.org/licenses/by-nc-sa/4.0/
 
-**In the following the licenses of the original FFHQ-dataset**: The individual images were published in Flickr by their respective authors under Public Domain CC0 1.0, or U.S. Government Works license. This license allows free use, redistribution, and adaptation for non-commercial purposes.
+**In the following the licenses of the original Kaggle Dataset**: The individual images were published in Flickr by their respective authors under Public Domain CC0 1.0, or U.S. Government Works license. This license allows free use, redistribution, and adaptation for non-commercial purposes.
 
 - https://creativecommons.org/publicdomain/zero/1.0/
 
