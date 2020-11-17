@@ -48,6 +48,7 @@ class FaceMaskDataset(Dataset):
             label: (int) corresponding label of image
         """
         image = Image.open(self.filenames[idx])  # PIL image
+        image = image.convert('RGB')
         image = self.transform(image)
         return image, self.labels[idx]
 
