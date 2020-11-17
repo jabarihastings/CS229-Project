@@ -28,7 +28,7 @@ parser.add_argument('--data_dir', default='data/ffhq-maskednet',
                     help="Directory containing the dataset")
 parser.add_argument('--model_dir', default='code/experiments/example_trans_learning',
                     help="Directory containing params.json")
-parser.add_argument('--net',
+parser.add_argument('--net', default='resnet',
                     help="The name of the neural network")
 parser.add_argument('--restore_file', default=None,
                     help="Optional, name of the file in --model_dir containing weights to reload before \
