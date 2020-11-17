@@ -27,7 +27,7 @@ class FaceMaskDataset(Dataset):
             transform: (torchvision.transforms) transformation to apply on image
         """
         self.filenames = os.listdir(data_dir)
-        self.filenames = [os.path.join(data_dir, f) for f in self.filenames if f.endswith('.jpg')]
+        self.filenames = [os.path.join(data_dir, f) for f in self.filenames if f.endswith(('.jpg', '.png'))]
 
         self.labels = [int(os.path.split(filename)[-1][0]) for filename in self.filenames]
         self.transform = transform
