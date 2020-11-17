@@ -1,4 +1,6 @@
 """ Extracts images in Pascal VOC Format
+
+Adapted from https://gitlab.com/straighter/pascalvoc-to-image
 """
 import argparse
 import os
