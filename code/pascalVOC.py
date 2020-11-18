@@ -13,11 +13,11 @@ from PIL import Image
 # Main entry function to start the program
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('pascalDirectory', metavar='pascalDirectory', type=str,
+    parser.add_argument('--pascalDirectory', metavar='pascalDirectory', type=str,
                         help='A path to the directory with Pascal VOC XML files')
-    parser.add_argument('imageDirectory', metavar='imageDirectory', type=str,
+    parser.add_argument('--imageDirectory', metavar='imageDirectory', type=str,
                         help='A path to the directory with images')
-    parser.add_argument('saveDirectory', metavar='saveDirectory', type=str,
+    parser.add_argument('--saveDirectory', metavar='saveDirectory', type=str,
                         help='A path to the directory to save Pascal boundingbox images to')
 
     args = parser.parse_args()
