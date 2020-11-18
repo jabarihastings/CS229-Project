@@ -7,7 +7,7 @@ import argparse
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model_dir', default='experiments/softmax',
+parser.add_argument('--model_dir', default='experiments/softmax_kaggle_baseline',
                     help="Directory containing params.json")
 parser.add_argument('--verbose', default=1,
                     help="Directory containing params.json")
