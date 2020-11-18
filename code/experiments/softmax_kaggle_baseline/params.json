@@ -2,5 +2,6 @@
     "img_dimensions": 30,
     "num_classes": 3,
     "iter": 1000,
-    "dataset": "kaggle"
+    "dataset": "kaggle",
+    "model_type": "softmax"
 }

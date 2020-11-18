@@ -85,6 +85,19 @@ def visualize(x, y):
     ax.set_title('PCA of Data Set')
     plt.show()
 
+def load_dataset_for_split(args, params):
+    # Get data_dir
+    data_dir = '../data/' + params.dataset
+    X_train, Y_train = load_dataset_from_split_directory(data_dir + '/train/', params.img_dimensions, args.verbose)
+    X_val, Y_val = load_dataset_from_split_directory(data_dir + '/val/', params.img_dimensions, args.verbose)
+    X_test, Y_test = load_dataset_from_split_directory(data_dir + '/test/', params.img_dimensions, args.verbose)
+
+    return {
+        'train': (X_train, Y_train),
+        'val': (X_val, Y_val),
+        'test': (X_test, Y_test)
+    }
+
 def compute_and_save_f1(saved_outputs, saved_labels, file):
     conf_matrix, report = f1_metrics(saved_outputs, saved_labels)
 
