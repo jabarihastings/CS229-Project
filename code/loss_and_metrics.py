@@ -1,3 +1,5 @@
+# Deprecated. Add any metrics directly into cnnv2
+
 from sklearn import metrics as sklearn_metrics
 import numpy as np
 import torch.nn as nn

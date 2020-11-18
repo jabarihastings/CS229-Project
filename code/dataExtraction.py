@@ -1,147 +1,115 @@
-import argparse
+import openpyxl
+import collections
 import os
-import xml.etree.ElementTree as ET
-import time
-from tqdm import tqdm
 from PIL import Image
+import random
+import json
+from shutil import copyfile
+
+IMG_DIM = 224
+xlsx_path = "../Annotations/kaggle-classes.xlsx" #"./Annotations/Mask-classes.xlsx"
+photo_path_prefix = "../../combined" #"./Photos/"
 
 
-# Main entry function to start the program
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('pascalDirectory', metavar='pascalDirectory', type=str,
-                        help='A path to the directory with Pascal VOC XML files')
-    parser.add_argument('imageDirectory', metavar='imageDirectory', type=str,
-                        help='A path to the directory with images')
-    parser.add_argument('saveDirectory', metavar='saveDirectory', type=str,
-                        help='A path to the directory to save Pascal boundingbox images to')
+multiclass_classifications = {
+    "incorrect": 0,
+    "correct": 1,
+    "none": 2
+}
 
-    args = parser.parse_args()
+def split_into_train_val_test(dict):
+    random.seed(230)
 
-    run(args.pascalDirectory, args.imageDirectory, args.saveDirectory)
+    test = []
+    val = []
+    train = []
 
+    for category in dict:
+        img_names = list(dict[category])
+        img_names.sort()
+        random.shuffle(img_names)
 
-# Main function responsible for running necessary code
-def run(pascal_dir, image_dir, save_dir):
-    pascal_files = get_pascal_files(pascal_dir)
-    parsed_pascal_files = parse_pascal_files(pascal_files, image_dir)
-    make_dir(save_dir)
-    create_label_dirs(parsed_pascal_files.get('labels'), save_dir)
-    pascalvoc_to_images(parsed_pascal_files.get('pascal_data'), save_dir)
+        test_split = int(0.1 * len(img_names))
+        val_split = int(.18 * len(img_names))
 
+        test_img_names = img_names[:test_split]
+        val_img_names = img_names[test_split: test_split + val_split]
+        train_img_names = img_names[test_split + val_split:]
 
-# Get all PascalVOC xml files from a specific path
-def get_pascal_files(path):
-    # Array of dicts with file data
-    files = []
+        test.extend(test_img_names)
+        val.extend(val_img_names)
+        train.extend(train_img_names)
 
-    # Loop through all files at a certain path
-    for file in tqdm(os.listdir(path)):
-        # Only consider XML
-        if file.endswith('.xml'):
-            # Store relevant file data
-            files.append({'base': path, 'filename': file, 'path': os.path.join(path, file)})
-
-    return files
+    return {
+        "test": set(test),
+        "val": set(val),
+        "train": set(train)
+    }
 
 
-# Parse a specific PascalVOC file to a usable dict format
-def parse_pascal_file(file, image_dir):
-    xml_path = file.get('path')
+def generate_binary_and_multiclass_dict():
+    wb_obj = openpyxl.load_workbook(xlsx_path)
+    sheet_obj = wb_obj.active
 
-    # XML root
-    xml = ET.parse(xml_path).getroot()
+    multiclass_dict = collections.defaultdict(set)
 
-    print("HEY", xml.find('filename'))
-    # Img name corresponding to XML
-    img_name = xml.find('filename').text
+    num_row = sheet_obj.max_row
 
-    items = []
+    for i in range(2, num_row + 1):
+        image_name = sheet_obj.cell(row=i, column=1).value
+        binary = sheet_obj.cell(row=i, column=2).value
+        multiclass = sheet_obj.cell(row=i, column=3).value
 
-    # A set of labels within a single PascalVOC XML file
-    labels = set()
+        multiclass_dict[multiclass].add(image_name)
 
-    # Loop through all labeled objects and add to items/labels
-    for i, obj in enumerate(xml.iter('object')):
-        # Number each individual object to be able to get multiple objects from one file
-        object_number = i + 1
-        object_name = '{}_{}'.format(object_number, img_name)
-        object_label = obj.find('name').text
-        object_bndbox = obj.find('bndbox')
-        labels.add(obj.find('name').text)
-
-        items.append({
-            'path': os.path.join(image_dir, img_name),
-            'name': object_name,
-            'xmin': object_bndbox.find('xmin').text,
-            'xmax': object_bndbox.find('xmax').text,
-            'ymin': object_bndbox.find('ymin').text,
-            'ymax': object_bndbox.find('ymax').text,
-            'label': object_label
-        })
-
-    return {'items': items, 'labels': labels}
+    return multiclass_dict
 
 
-# Parse all pascal files
-def parse_pascal_files(files, image_dir):
-    pascal_data = []
-    labels = set()
-
-    # Loop through all PascalVOC XML files and parse them
-    for file in tqdm(files, ascii=True, desc="Parsing pascal files"):
-        try:
-            parses = parse_pascal_file(file, image_dir)
-
-            # Merge all object labels
-            labels = labels.union(parses.get('labels'))
-
-            # Merge all pascal data
-            pascal_data += parses.get('items')
-        except Exception as e:
-            # Just error if a single file can't be read
-            print('Error reading PascalVOC XML file.')
-            print('ERROR:' + str(e))
-
-    return {'pascal_data': pascal_data, 'labels': labels}
+def generate_train_val_test_split(multiclass_dict):
+    multiclass_split = split_into_train_val_test(multiclass_dict)
+    return multiclass_split
 
 
-# Loop through all PascalVOC data and cut an image from each
-def pascalvoc_to_images(pascal_data, save_path):
-    for item in tqdm(pascal_data, ascii=True, desc="Creating images from pascal data"):
-        pascalvoc_to_image(item, save_path)
+def get_split(img, split_dict):
+    if img in split_dict["test"]:
+        return "test"
+    if img in split_dict["val"]:
+        return "val"
+    return "train"
 
 
-# Cut an image from a PascalVOC file data
-def pascalvoc_to_image(pascal_data, save_path):
-    # Create the bndbox to cut from
-    bndbox = (int(pascal_data.get('xmin')), int(pascal_data.get('ymin')), int(pascal_data.get('xmax')),
-              int(pascal_data.get('ymax')))
-
-    # Load the original image
-    image = Image.open(pascal_data.get('path'))
-
-    # Cut a new image from the image using bndbox
-    image = image.crop(bndbox)
-
-    try:
-        # Save the image to the save_path in the corresponding label folder
-        image.save(os.path.join(save_path, pascal_data.get('label'), pascal_data.get('name')))
-    except Exception as  e:
-        # Just error if a single image does not save
-        print('Error saving cut image')
-        print('ERROR: ' + str(e))
+def resize_and_save(filename, output_path, size=IMG_DIM):
+    """Resize the image contained in `filename` and save it to the `output_dir`"""
+    image = Image.open(filename)
+    # Use bilinear interpolation instead of the default "nearest neighbor" method
+    image = image.resize((size, size), Image.BILINEAR)
+    image.save(output_path)
 
 
-# Function to create all label directories
-def create_label_dirs(labels, save_path):
-    for label in tqdm(labels, ascii=True, desc="Creating label directories"):
-        make_dir(save_path, label)
+def copy_photo_files_into_directories(classification_dict, classification_type, split_dict):
+    for (category, images) in classification_dict.items():
+        num = str(classification_type[category])
+        for img in images:
+            split = get_split(img, split_dict)
+            make_dir(os.path.join("three_classes", "multiclass", split))
+            new_img_path = os.path.join("three_classes", "multiclass", split, num + "_" + img)
+            resize_and_save(os.path.join(photo_path_prefix, img), new_img_path)
 
 
-# Helper function to create a directory if it does not already exists
-def make_dir(path, name=''):
-    path = os.path.abspath(os.path.join(path, name))
+def categorize_train_val_test_split(verbose = False):
+    multiclass_dict = generate_binary_and_multiclass_dict()
+    if verbose:
+        print("Finished categorizing pictures into their respective classes for multiclass classification")
+    multiclass_split = generate_train_val_test_split(multiclass_dict)
+    if verbose:
+        print("Finished splitting dataset")
+    copy_photo_files_into_directories(multiclass_dict, multiclass_classifications, multiclass_split)
+    if verbose:
+        print("Finished copying photos into the 'multiclass' folder")
+
+
+def make_dir(path):
+    path = os.path.abspath(os.path.join(path))
 
     if not os.path.exists(path):
         try:
@@ -150,6 +118,10 @@ def make_dir(path, name=''):
             # Raise if directory can't be made, because image cuts won't be saved.
             print('Error creating directory')
             raise e
+
+def main():
+    categorize_train_val_test_split(True)
+
 
 if __name__ == "__main__":
     main()

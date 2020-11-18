@@ -5,6 +5,27 @@ from sklearn.decomposition import PCA
 from skimage.transform import resize
 from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+from sklearn import metrics as sklearn_metrics
+
+def load_dataset_from_split_directory(path, img_dimensions, verbose=True):
+    x = []
+    y = []
+
+    for n, f in enumerate(listdir(path), start=1):
+        if "png" not in f and "jpg" not in f: continue
+        img = plt.imread(path + f)[:, :, 0]  # Just one dimension
+        img = resize(img, (img_dimensions, img_dimensions), anti_aliasing=True)
+        x.append(img.flatten())
+        label = int(f[0])
+        y.append(label)
+
+    if verbose:
+        print("Loaded {} files.".format(len(y)))
+
+    if verbose:
+        print("Loading data from path: {} ".format(path))
+
+    return np.array(x), np.array(y)
 
 
 def load_dataset(train_path, classes, img_dimensions, add_intercept=False, verbose=True):
@@ -64,27 +85,13 @@ def visualize(x, y):
     ax.set_title('PCA of Data Set')
     plt.show()
 
-def decisionMatrix(predicted, actual, verbose = None):
-    isEqual = np.where(predicted != actual, 0, 1)
-    tp = predicted.T.dot(isEqual)
-    fp = (1-isEqual).T.dot(predicted)
-    fn = (1-predicted).T.dot(1-isEqual)
-    tn = (1-predicted).T.dot(isEqual)
-    if (verbose):
-        print(verbose)
-        print("FP: %d" % fp)
-        print("TP: %d" % tp)
-        print("TN: %d" % tn)
-        print("FN: %d" % fn)
-    return (tp, fp, fn, tn)
+def compute_and_save_f1(saved_outputs, saved_labels, file):
+    conf_matrix, report = f1_metrics(saved_outputs, saved_labels)
 
-def findF1Score(predicted, actual, verbose = None):
-    (tp, fp, fn, tn) = decisionMatrix(predicted, actual, verbose)
-    precision = tp / (tp + fp)
-    recall = tp / (tp + fn)
-    f1 = 2 * precision * recall / (precision + recall)
-    if verbose:
-        print("Precision: ", precision)
-        print("Recall: ", recall)
-        print("F1: ", f1)
-    return f1
+    text_file = open(file, "wt")
+    text_file.write('Confusion matrix: \n {}\n\n Classification Report: \n {}'.format(conf_matrix, report))
+
+def f1_metrics(outputs, labels):
+    confusion_matrix = sklearn_metrics.confusion_matrix(labels, outputs)
+    classification_report = sklearn_metrics.classification_report(labels, outputs, digits=3)
+    return confusion_matrix, classification_report

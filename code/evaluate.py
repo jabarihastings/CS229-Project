@@ -8,16 +8,16 @@ import numpy as np
 import torch
 from torch.autograd import Variable
 import deep_net_utils
-import loss_and_metrics
+import model.cnnv2 as cnnv2
 import model.data_loader as data_loader
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--data_dir', default='data/large/three_classes/multiclass',
+parser.add_argument('--data_dir', default='data/example',
                     help="Directory containing the dataset")
-parser.add_argument('--model_dir', default='code/experiments/example_trans_learning',
+parser.add_argument('--model_dir', default='experiments/example_trans_learning',
                     help="Directory containing params.json")
-parser.add_argument('--net',
-                    help="Directory containing params.json")
+parser.add_argument('--net', default='resnet',
+                    help="The name of the neural network")
 parser.add_argument('--restore_file', default='best', help="name of the file in --model_dir \
                      containing weights to load")
 
@@ -104,10 +104,12 @@ if __name__ == '__main__':
     logging.info("- done.")
 
     # Define the model
-    model = deep_net_utils.get_model(args, params)
+    model = cnnv2.initialize_model(model_name=args.net, num_classes=3, feature_extract=False, use_pretrained=True)
+    if params.cuda : model = model.cuda()
+    print(model)
 
-    loss_fn = loss_and_metrics.loss_fn
-    metrics = loss_and_metrics.metrics
+    loss_fn = torch.nn.CrossEntropyLoss()
+    metrics = cnnv2.metrics
 
     logging.info("Starting evaluation")
 
