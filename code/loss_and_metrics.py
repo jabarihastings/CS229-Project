@@ -22,7 +22,7 @@ def accuracy(outputs, labels):
     Compute the accuracy, given the outputs and labels for all images.
 
     Args:
-        outputs: (np.ndarray) dimension batch_size x 6 - log softmax_kaggle_baseline output of the model
+        outputs: (np.ndarray) dimension batch_size x 6 - log softmax output of the model
         labels: (np.ndarray) dimension batch_size, where each element is a value in [0, 1, 2, 3, 4, 5]
 
     Returns: (float) accuracy in [0,1]
