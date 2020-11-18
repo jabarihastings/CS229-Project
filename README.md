@@ -45,6 +45,11 @@ $ source .env/bin/activate
 $ pip install -r code/requirements.txt
 ```
 
+Here is how we trained the MobileNet neural network on the FFHQ/MaskedNet dataset 
+```sh
+$ python3 train.py --data_dir data/ffhq-maskednet --model_dir experiments/mobilenet_ffhq-maskednet --net mobilenet
+```
+
 ### Todos
  - Add instructions for how to run code
  - Add Night Mode
