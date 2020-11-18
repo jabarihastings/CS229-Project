@@ -45,7 +45,12 @@ $ source .env/bin/activate
 $ pip install -r code/requirements.txt
 ```
 
-Here is how we trained the MobileNet neural network on the FFHQ/MaskedNet dataset 
+
+All experiments should be run in the code folder. Here's how we trained the MobileNetV2 on the Kaggle dataset:
+```sh
+$ python3 train.py --data_dir data/kaggle --model_dir experiments/mobilenet_kaggle --net mobilenet   
+
+Here is how we trained the MobileNetV2 neural network on the FFHQ/MaskedNet dataset 
 ```sh
 $ python3 train.py --data_dir data/ffhq-maskednet --model_dir experiments/mobilenet_ffhq-maskednet --net mobilenet
 ```
