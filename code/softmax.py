@@ -1,30 +1,68 @@
-import sys
+import os
 import util
-import numpy as np
-
-from sklearn.model_selection import train_test_split
+import deep_net_utils
 from sklearn.linear_model import LogisticRegression
-from sklearn.linear_model import SGDClassifier
+import random
+import argparse
 
 
-def main(vis = False):
-    X, Y = util.load_dataset('../kaggleData/sorted', ['mask_weared_incorrect', 'with_mask', 'without_mask'], 30)
+parser = argparse.ArgumentParser()
+parser.add_argument('--model_dir', default='experiments/softmax_kaggle_baseline',
+                    help="Directory containing params.json")
+parser.add_argument('--verbose', default=1,
+                    help="Directory containing params.json")
+parser.add_argument('--vis', default=0,
+                    help="Directory containing params.json")
 
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=0)
-    clf = LogisticRegression(random_state=0, max_iter=1000, multi_class='multinomial', solver='lbfgs').fit(X_train, Y_train)
+def load_dataset(args, params):
+    # Get data_dir
+    data_dir = '../data/' + params.dataset
+    X_train, Y_train = util.load_dataset_from_split_directory(data_dir + '/train/', params.img_dimensions, args.verbose)
+    X_val, Y_val = util.load_dataset_from_split_directory(data_dir + '/val/', params.img_dimensions, args.verbose)
+    X_test, Y_test = util.load_dataset_from_split_directory(data_dir + '/test/', params.img_dimensions, args.verbose)
 
-    # predictedTrain = clf.predict(X_train)
-    # util.findF1Score(predictedTrain, Y_train, "On Train Set")
-    accOnTrain = clf.score(X_train, Y_train)
-    print("Acc on train: ", accOnTrain)
+    return {
+        'train': (X_train, Y_train),
+        'val': (X_val, Y_val),
+        'test': (X_test, Y_test)
+    }
 
-    # predictedTest = clf.predict(X_test)
-    # util.findF1Score(predictedTest, Y_test, "On Test Set")
-    accOnTest = clf.score(X_test, Y_test)
-    print("Acc on test: ", accOnTest)
 
-    if vis: util.visualize(X_train, Y_train)
+def main(args):
+    random.seed(229)
+    # load hyperparameters
+    json_path = os.path.join(args.model_dir, "params.json")
+    assert os.path.isfile(
+        json_path), "No json configuration file found at {}".format(json_path)
+    params = deep_net_utils.Params(json_path)
+
+    data_container = load_dataset(args, params)
+    X_train, Y_train = data_container['train']
+    X_val, Y_val = data_container['val']
+    X_test, Y_test = data_container['test']
+
+    clf = LogisticRegression(random_state=0, max_iter=params.iter, multi_class='multinomial', solver='lbfgs').fit(X_train, Y_train)
+
+    predicted_train = clf.predict(X_train)
+    predicted_val = clf.predict(X_val)
+
+    train_confus_save_path = os.path.join(
+        args.model_dir, "confus_f1_train.json")
+    val_confus_save_path = os.path.join(
+        args.model_dir, "confus_f1_val.json")
+
+    util.compute_and_save_f1(predicted_train, Y_train, train_confus_save_path)
+    util.compute_and_save_f1(predicted_val, Y_val, val_confus_save_path)
+
+
+    train_accur = clf.score(X_train, Y_train)
+    print("Acc on train: ", train_accur)
+
+    val_accur = clf.score(X_val, Y_val)
+    print("Acc on validation: ", val_accur)
+
+    if args.vis: util.visualize(X_train, Y_train)
 
 
 if __name__ == "__main__":
-    main(True)
+    main(parser.parse_args())
