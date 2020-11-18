@@ -1,0 +1,8 @@
+{
+    "img_dimensions": 30,
+    "num_classes": 3,
+    "iter": 1000,
+    "dataset": "ffhq-maskednet",
+    "model_type": "svm",
+    "kernel": "rbf"
+}

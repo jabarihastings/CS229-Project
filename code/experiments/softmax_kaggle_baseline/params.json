@@ -1,7 +1,10 @@
 {
     "img_dimensions": 30,
     "num_classes": 3,
-    "iter": 1000,
+    "iter": 100000,
     "dataset": "kaggle",
-    "model_type": "softmax"
+    "model_type": "softmax",
+    "penalty": "none",
+    "regularization_constant": 1,
+    "class_weight": "none"
 }

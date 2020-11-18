@@ -3,5 +3,5 @@
     "num_classes": 3,
     "iter": 1000,
     "dataset": "kaggle",
-    "model_type": 'softmax'
+    "model_type": "softmax"
 }

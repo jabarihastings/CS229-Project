@@ -6,6 +6,7 @@ import random
 import argparse
 from sklearn.svm import SVC
 import pickle
+import numpy as np
 
 
 parser = argparse.ArgumentParser()
@@ -41,8 +42,18 @@ def evaluate(args, params):
 
 
 def fit_softmax_or_svm(X_train, Y_train, params):
+    class_weight = None if params.class_weight == "none" else params.class_weight
+    if params.class_weight == 'custom': class_weight = {0: 10, 1:1, 2: 3}
     if params.model_type == 'softmax':
-        return LogisticRegression(random_state=0, max_iter=params.iter, multi_class='multinomial', solver='lbfgs').fit(X_train, Y_train)
+        return LogisticRegression(
+            random_state=0,
+            max_iter=params.iter,
+            multi_class='multinomial',
+            solver='lbfgs',
+            penalty=params.penalty,
+            C=1/params.regularization_constant,
+            class_weight=class_weight
+        ).fit(X_train, Y_train)
     if params.model_type == 'svm':
         svm = SVC(kernel=params.kernel, probability=True, random_state=42).fit(X_train, Y_train)
         return svm
@@ -62,9 +73,16 @@ def train(args, params):
     X_val, Y_val = data_container['val']
     X_test, Y_test = data_container['test']
 
+    if args.verbose: print("We have {}, {}, and {} training examples for classes 0, 1, 2 respectively.".format(
+        np.sum(np.where(Y_train == 0, 1, 0)),
+        np.sum(np.where(Y_train == 1, 1, 0)),
+        np.sum(np.where(Y_train == 2, 1, 0))
+    ))
+
     model = fit_softmax_or_svm(X_train, Y_train, params)
 
-    model_file_path = args.model_dir + 'finalized_model.sav'
+    model_file_path = os.path.join(
+        args.model_dir, "finalized_model.sav")
     pickle.dump(model, open(model_file_path, 'wb'))
 
     predicted_train = model.predict(X_train)
@@ -77,7 +95,7 @@ def train(args, params):
 
     util.compute_and_save_f1(predicted_train, Y_train, train_confus_save_path)
     util.compute_and_save_f1(predicted_val, Y_val, val_confus_save_path)
-
+    if params.model_type == 'softmax' and args.verbose: print("Model converged in {} iterations.".format(model.n_iter_))
 
     train_accur = model.score(X_train, Y_train)
     print("Acc on train: ", train_accur)
