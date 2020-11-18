@@ -1,0 +1,37 @@
+2020-11-17 19:51:08,006:INFO: Loading the datasets...
+2020-11-17 19:51:08,045:INFO: - done.
+2020-11-17 19:51:08,225:INFO: Starting training for 10 epoch(s)
+2020-11-17 19:51:08,225:INFO: Epoch 1/10
+2020-11-17 20:06:49,661:INFO: - Train metrics: accuracy: 0.902 ; macro f1: 0.884 ; loss: 0.218
+2020-11-17 20:08:37,463:INFO: - Eval metrics : accuracy: 0.999 ; macro f1: 0.999 ; loss: 0.007
+2020-11-17 20:08:37,978:INFO: - Found new best macro f1
+2020-11-17 20:08:38,025:INFO: Epoch 2/10
+2020-11-17 20:22:59,554:INFO: - Train metrics: accuracy: 0.987 ; macro f1: 0.986 ; loss: 0.027
+2020-11-17 20:24:38,783:INFO: - Eval metrics : accuracy: 0.999 ; macro f1: 0.999 ; loss: 0.003
+2020-11-17 20:24:39,420:INFO: - Found new best macro f1
+2020-11-17 20:24:39,423:INFO: Epoch 3/10
+2020-11-17 20:38:36,164:INFO: - Train metrics: accuracy: 0.996 ; macro f1: 0.996 ; loss: 0.011
+2020-11-17 20:40:10,257:INFO: - Eval metrics : accuracy: 0.996 ; macro f1: 0.996 ; loss: 0.009
+2020-11-17 20:40:10,545:INFO: Epoch 4/10
+2020-11-17 20:53:16,978:INFO: - Train metrics: accuracy: 1.000 ; macro f1: 1.000 ; loss: 0.006
+2020-11-17 20:54:39,223:INFO: - Eval metrics : accuracy: 0.998 ; macro f1: 0.998 ; loss: 0.007
+2020-11-17 20:54:39,414:INFO: Epoch 5/10
+2020-11-17 21:07:39,354:INFO: - Train metrics: accuracy: 1.000 ; macro f1: 1.000 ; loss: 0.005
+2020-11-17 21:08:57,747:INFO: - Eval metrics : accuracy: 1.000 ; macro f1: 1.000 ; loss: 0.002
+2020-11-17 21:08:58,086:INFO: - Found new best macro f1
+2020-11-17 21:08:58,100:INFO: Epoch 6/10
+2020-11-17 21:23:51,512:INFO: - Train metrics: accuracy: 1.000 ; macro f1: 1.000 ; loss: 0.005
+2020-11-17 21:25:32,783:INFO: - Eval metrics : accuracy: 1.000 ; macro f1: 1.000 ; loss: 0.002
+2020-11-17 21:25:33,296:INFO: - Found new best macro f1
+2020-11-17 21:25:33,298:INFO: Epoch 7/10
+2020-11-17 21:39:27,712:INFO: - Train metrics: accuracy: 1.000 ; macro f1: 1.000 ; loss: 0.002
+2020-11-17 21:41:08,167:INFO: - Eval metrics : accuracy: 0.997 ; macro f1: 0.997 ; loss: 0.006
+2020-11-17 21:41:08,393:INFO: Epoch 8/10
+2020-11-17 21:54:23,910:INFO: - Train metrics: accuracy: 1.000 ; macro f1: 1.000 ; loss: 0.002
+2020-11-17 21:55:43,705:INFO: - Eval metrics : accuracy: 0.999 ; macro f1: 0.999 ; loss: 0.003
+2020-11-17 21:55:43,957:INFO: Epoch 9/10
+2020-11-17 22:08:58,522:INFO: - Train metrics: accuracy: 1.000 ; macro f1: 1.000 ; loss: 0.003
+2020-11-17 22:10:38,944:INFO: - Eval metrics : accuracy: 0.999 ; macro f1: 0.999 ; loss: 0.004
+2020-11-17 22:10:39,219:INFO: Epoch 10/10
+2020-11-17 22:25:26,311:INFO: - Train metrics: accuracy: 0.996 ; macro f1: 0.994 ; loss: 0.004
+2020-11-17 22:27:19,462:INFO: - Eval metrics : accuracy: 0.999 ; macro f1: 0.999 ; loss: 0.002
