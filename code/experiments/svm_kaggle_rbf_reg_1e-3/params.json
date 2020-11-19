@@ -1,0 +1,12 @@
+{
+    "img_dimensions": 96,
+    "num_classes": 3,
+    "iter": -1,
+    "dataset": "kaggle",
+    "gamma": "scale",
+    "model_type": "svm",
+    "kernel": "rbf",
+    "degree": 1,
+    "regularization_contant": 1e-3,
+    "class_weight": "none"
+}
