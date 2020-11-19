@@ -55,7 +55,14 @@ def fit_softmax_or_svm(X_train, Y_train, params):
             class_weight=class_weight
         ).fit(X_train, Y_train)
     if params.model_type == 'svm':
-        svm = SVC(kernel=params.kernel, probability=True, random_state=42).fit(X_train, Y_train)
+        svm = SVC(
+            C=1/params.regularization_contant,
+            kernel=params.kernel,
+            degree=params.degree,
+            gamma=params.gamma,
+            class_weight=class_weight,
+            probability=True,
+            random_state=42).fit(X_train, Y_train)
         return svm
     return None
 

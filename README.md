@@ -46,15 +46,59 @@ $ pip install -r code/requirements.txt
 ```
 
 
-All experiments should be run in the code folder. Here's how we trained the MobileNetV2 on the Kaggle dataset:
+All experiments should be run in the code folder. 
+Here's how we trained the MobileNetV2 on the Kaggle dataset:
 ```sh
 $ python3 train.py --data_dir data/kaggle --model_dir experiments/mobilenet_kaggle --net mobilenet   
+```
 
 Here is how we trained the MobileNetV2 neural network on the FFHQ/MaskedNet dataset 
 ```sh
 $ python3 train.py --data_dir data/ffhq-maskednet --model_dir experiments/mobilenet_ffhq-maskednet --net mobilenet
 ```
+Here is how we train Softmax and SVM on the Kaggle and FFHQ/MaskedNet datasets: 
+```sh
+$ python train_softmax_or_svm.py --model_dir experiments/{A}_{B}_{C}   
+```
+- {A} is strictly either ```softmax``` or ```svm```. This chooses the model.
+- {B} is either ```kaggle``` or ```ffhq-maskednet```
+- {C} is named to describe briefly what the experiment tests for. 
 
+Inside of the directory for each model experiment 
+(i.e. ```experiments/softmax_kaggle_baseline```) lies a ```params.json``` file that is used to specify the parameters 
+for the model. {B} and {C} can be named arbitrarily since the ```params.json``` file is what truly determine the dataset
+and the list of parameters to be used. 
+
+For the Softmax models, the following parameters need to be set in the JSON file:
+- img_dimensions (int)
+ ** We used 30 for the Kaggle dataset and tested 30, 60, 96, 120, 180, 224 for the FFHQ-MaskedNet dataset.
+- num_classes (int) ** This is always 3 for our case.
+- iter (int) ** We used 100000 for the Softmax classifiers.
+- dataset (```kaggle``` or ```ffhq-maskednet```)
+- model_type (```softmax```)
+- penalty (```none``` or ```l2```)
+- regularization_constant ** We tested ```0, 1e-4, 1e-3, 5e-3, 8e-3, 7e-3, 1e-2, 1e-1, and 1```
+- class_weight (```none``` or ```custom``` or ```balanced```) ** We only tested 'balanced' and 'custom' for the Kaggle dataset
+becuase FFHQ-MaskedNet was very balanced. Setting 'balanced' means the weights are inversely proportional to the class
+frequencies. For 'custom', we somewhat arbitrarily used a semi-balanced dict for the Kaggle dataset ```{0: 10, 1:1, 2: 3}```.
+
+For the SVM models, the following parameters need to be set in the JSON file:
+For the softmax models, the following parameters need to be set:
+- img_dimensions (int)
+ ** We used 30 for the Kaggle dataset and tested 30, 60, 96, 120, 180, 224 for the FFHQ-MaskedNet dataset.
+- num_classes (int) ** This is always 3 for our case.
+- iter (int) ** We set this to be -1 for the Kaggle dataset to allow it to run until convergence.
+ However, to make SVM run faster for the FFHQ-MaskedNet dataset, we only used 10000 iterations.
+- dataset (```kaggle``` or ```ffhq-maskednet```)
+- model_type (```svm```)
+- gamma (```scale```)
+- kernel (```rbf``` or ```poly```)
+- degree (int) ** This only matters for the polynomial kernel. We tested 2, 3, 5, 10, and 20 for the polynomial kernel.
+- regularization_constant ** We tested ```1e-5, 1e-4, 1e-3, 1e-2, 1e-1, and 1```. Since L2 regularization is automatically applied, 
+we tried a very small constant ```1e-5```
+- class_weight (```none``` or ```custom``` or ```balanced```) ** We only tested 'balanced' and 'custom' for the Kaggle dataset
+becuase FFHQ-MaskedNet was very balanced. Setting 'balanced' means the weights are inversely proportional to the class
+frequencies. For 'custom', we somewhat arbitrarily used a semi-balanced dict for the Kaggle dataset ```{0: 10, 1:1, 2: 3}```.
 ### Todos
  - Add instructions for how to run code
  - Add Night Mode

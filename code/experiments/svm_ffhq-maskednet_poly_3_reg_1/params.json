@@ -1,0 +1,12 @@
+{
+    "img_dimensions": 96,
+    "num_classes": 3,
+    "iter": 10000,
+    "dataset": "ffhq-maskednet",
+    "gamma": "scale",
+    "model_type": "svm",
+    "kernel": "poly",
+    "degree": 3,
+    "regularization_contant": 1,
+    "class_weight": "none"
+}
