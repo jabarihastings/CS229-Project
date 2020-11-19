@@ -1,0 +1,15 @@
+Confusion matrix: 
+ [[1261   58  117]
+ [   5 1366   10]
+ [  78   55 1307]]
+
+ Classification Report: 
+               precision    recall  f1-score   support
+
+           0      0.938     0.878     0.907      1436
+           1      0.924     0.989     0.955      1381
+           2      0.911     0.908     0.910      1440
+
+    accuracy                          0.924      4257
+   macro avg      0.924     0.925     0.924      4257
+weighted avg      0.924     0.924     0.924      4257
