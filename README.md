@@ -99,9 +99,14 @@ we tried a very small constant ```1e-5```
 - class_weight (```none``` or ```custom``` or ```balanced```) ** We only tested 'balanced' and 'custom' for the Kaggle dataset
 becuase FFHQ-MaskedNet was very balanced. Setting 'balanced' means the weights are inversely proportional to the class
 frequencies. For 'custom', we somewhat arbitrarily used a semi-balanced dict for the Kaggle dataset ```{0: 10, 1:1, 2: 3}```.
-### Todos
- - Add instructions for how to run code
- - Add Night Mode
+
+To evaluate the model on the test set, run the following:
+```
+python train_softmax_or_svm.py --model_dir experiments/{A}_{B}_{C} --evaluate test
+```
+You must be in the ```code/``` directory. The experiment model directory ```experiments/{A}_{B}_{C}``` should contain the params and saved model. This can only be 
+run after you've train the model, which automatically save the model to that experiment model directory.
+
 
 # Acknowlegements
 We would like to thank Tero Karras, Samuli Laine, and Timo Aila for their work on face detection, which resulted in the FFHQ dataset
