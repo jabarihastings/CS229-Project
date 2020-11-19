@@ -10,6 +10,33 @@ We make use of a subset of the images made avaialable through the following data
 
 We combined a subset of FFHQ and MaskedFaceNet datasets to get a corpus (with ~4000 images) of people in all three categories. We used the entire Kaggle Face Maske Detection dataset as a second resource for testing and training. Our datasets can be found at https://stanford.app.box.com/folder/126299596483.
 
+### Usage 
+Requirements:
+We recommend using python3 and a virtual env. Run the follow commands:
+```sh
+$ virtualenv -p python3 .env
+$ source .env/bin/activate
+$ pip install -r code/requirements.txt
+```
+
+All experiments should be run in the code folder. Here's how we trained the MobileNetV2 on the Kaggle dataset:
+```sh
+$ python3 train.py --data_dir data/kaggle --model_dir experiments/mobilenet_kaggle --net mobilenet   
+```
+We evaluated the MobileNetV2 on the Kaggle dataset as follows:
+```sh
+$ python3 evaluate.py --data_dir data/kaggle --model_dir experiments/mobilenet_kaggle --net mobilenet   
+```
+
+Here is how we trained the MobileNetV2 neural network on the FFHQ/MaskedNet dataset 
+```sh
+$ python3 train.py --data_dir data/ffhq-maskednet --model_dir experiments/mobilenet_ffhq-maskednet --net mobilenet
+```
+
+### Todos
+ - Add instructions for how to run code
+ - Add Night Mode
+
 ### Licenses
 **In the following the licenses of the original FFHQ-dataset**: The individual images were published in Flickr by their respective authors under either Creative Commons BY 2.0, Creative Commons BY-NC 2.0, Public Domain Mark 1.0, Public Domain CC0 1.0, or U.S. Government Works license. All of these licenses allow free use, redistribution, and adaptation for non-commercial purposes. However, some of them require giving appropriate credit to the original author, as well as indicating any changes that were made to the images. The license and original author of each image are indicated in the metadata.
 
