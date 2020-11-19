@@ -1,0 +1,8 @@
+2020-11-18 14:34:56,266:INFO: Creating the dataset...
+2020-11-18 14:34:56,269:INFO: - done.
+2020-11-18 14:34:56,482:INFO: Starting evaluation
+2020-11-18 14:35:39,657:INFO: - Eval metrics : accuracy: 0.966 ; macro f1: 0.855 ; loss: 0.103
+2020-11-18 18:28:22,320:INFO: Creating the dataset...
+2020-11-18 18:28:22,324:INFO: - done.
+2020-11-18 18:28:22,496:INFO: Starting evaluation
+2020-11-18 18:29:19,947:INFO: - Eval metrics : accuracy: 0.568 ; macro f1: 0.469 ; loss: 1.796
