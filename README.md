@@ -60,13 +60,13 @@ Here is how we train Softmax and SVM on the Kaggle and FFHQ/MaskedNet datasets:
 ```sh
 $ python train_softmax_or_svm.py --model_dir experiments/{A}_{B}_{C}   
 ```
-- {A} is strictly either ```softmax``` or ```svm```. This chooses the model.
+- {A} is strictly either ```softmax``` or ```svm```.
 - {B} is either ```kaggle``` or ```ffhq-maskednet```
 - {C} is named to describe briefly what the experiment tests for. 
 
 Inside of the directory for each model experiment 
 (i.e. ```experiments/softmax_kaggle_baseline```) lies a ```params.json``` file that is used to specify the parameters 
-for the model. {B} and {C} can be named arbitrarily since the ```params.json``` file is what truly determine the dataset
+for the model. {A}, {B} and {C} can be named arbitrarily since the ```params.json``` file is what truly determine the dataset
 and the list of parameters to be used. 
 
 For the Softmax models, the following parameters need to be set in the JSON file:
